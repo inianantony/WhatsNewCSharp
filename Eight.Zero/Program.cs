@@ -20,12 +20,19 @@ namespace Eight.Zero
         {
             public string Body { get; set; }
             public Author PostedBy { get; set; }
+
         }
 
         public class Author
         {
             public string Name { get; set; }
             public string Email { get; set; }
+
+            public Author(string name, string email)
+            {
+                Name = name;
+                Email = email;
+            }
         }
 
         static void Main(string[] args)
