@@ -6,16 +6,16 @@ namespace Eight.Zero
     {
         static void Main(string[] args)
         {
-            var post = new Models.BlogPost("Nullable Ref Types Rock!");
-            post.Comments.Add(new Models.Comment("Yes they do!", new Models.Author("John", "john@nullrefs.com")));
-            post.Comments.Add(new Models.Comment("I love them!", new Models.Author("Leah", "leah@nullrefs.com")));
+            var post = new BlogPost("Nullable Ref Types Rock!");
+            post.Comments.Add(new Comment("Yes they do!", new Author("John", "john@nullrefs.com")));
+            post.Comments.Add(new Comment("I love them!", new Author("Leah", "leah@nullrefs.com")));
             post.Comments.Add(null);
 
             PrintPostInfo(null);
 
         }
 
-        static void PrintPostInfo(Models.BlogPost post)
+        static void PrintPostInfo(BlogPost post)
         {
             Console.WriteLine($"{post.Title} ({post.Title!.Length})");
 
@@ -28,7 +28,14 @@ namespace Eight.Zero
                 Console.WriteLine($"{comment.PostedBy.Name} ({comment.PostedBy.Email}): " + $"{commentPreview}");
             }
         }
+    }
 
+    public static class PositionalPatternSample
+    {
+        public static bool IsInSeventhGradeMath(Student s)
+        {
+            return false;
+        }
 
     }
 }
