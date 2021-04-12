@@ -80,7 +80,9 @@ namespace Eight.Zero
                 (Color.Red, Color.Green) => Color.Brown,
                 (Color.Green, Color.Red) => Color.Brown,
 
-                (_,_) when c1 == c2 => c1,
+                (_, _) when c1 == c2 => c1,
+
+                _ => Color.Unknown
             };
         }
     }
