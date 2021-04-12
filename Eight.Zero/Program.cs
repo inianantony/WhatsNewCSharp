@@ -59,7 +59,8 @@ namespace Eight.Zero
             Console.WriteLine("----------------------");
             var options1 = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
             };
 
 
@@ -69,6 +70,9 @@ namespace Eight.Zero
             Console.WriteLine($"Course name: {course.CourseName}");
             Console.WriteLine($"Author: {course.Author.FirstName} " +
                               $"{course.Author.LastName}");
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(JsonSerializer.Serialize(course, options1));
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
