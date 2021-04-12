@@ -8,7 +8,12 @@ namespace Eight.Zero
         public class BlogPost
         {
             public string Title { get; set; }
-            public List<Comment> Comments { get; set; }
+            public List<Comment> Comments { get; } = new List<Comment>();
+
+            public BlogPost(string title)
+            {
+                Title = title;
+            }
         }
 
         public class Comment
