@@ -34,7 +34,8 @@ namespace Eight.Zero
     {
         public static bool IsInSeventhGradeMath(Student s)
         {
-            return s is (_, _, _, 7);
+            // Works because of deconstructor
+            return s is (_, _, (_, _, "Math"), 7);
         }
 
     }
