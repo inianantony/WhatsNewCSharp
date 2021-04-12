@@ -9,6 +9,8 @@ namespace Eight.Zero
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Utf8JsonReader Example");
+            Console.WriteLine("----------------------");
             var jsonFile = File.ReadAllBytes("sample.json");
             var jsonSpan = jsonFile.AsSpan();
             var jsonReader = new Utf8JsonReader(jsonSpan);
@@ -16,6 +18,23 @@ namespace Eight.Zero
             {
                 Console.WriteLine(GetTokenDesc(jsonReader));
             }
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("Utf8JsonReader Example");
+            Console.WriteLine("----------------------");
+            using var stream = File.OpenRead("sample.json");
+            using var doc = JsonDocument.Parse(stream);
+            var root = doc.RootElement;
+            var firstName = root.GetProperty("author").GetProperty("firstName").GetString();
+            Console.WriteLine($"Author first name: {firstName}");
+            Console.WriteLine(Environment.NewLine);
+            EnumerateElement(root);
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("Array Indices and Ranges Example");
+            Console.WriteLine("--------------------------------");
             var numbers = Enumerable.Range(1, 10).ToArray();
             var copy = numbers[0..^0]; // Copy all the numbers
             var copy1 = numbers[..]; // Copy all the numbers
@@ -46,6 +65,24 @@ namespace Eight.Zero
             post.Comments.Add(null);
 
             PrintPostInfo(null);
+        }
+
+        private static void EnumerateElement(JsonElement root)
+        {
+            foreach (var prop in root.EnumerateObject())
+            {
+                if (prop.Value.ValueKind == JsonValueKind.Object)
+                {
+                    Console.WriteLine($"{prop.Name}:");
+                    Console.WriteLine($"--BEGIN OBJECT--");
+                    EnumerateElement(prop.Value);
+                    Console.WriteLine($"--END OBJECT--");
+                }
+                else
+                {
+                    Console.WriteLine($"{prop.Name}: {prop.Value.GetRawText()}");
+                }
+            }
         }
 
         private static string GetTokenDesc(Utf8JsonReader json) =>
