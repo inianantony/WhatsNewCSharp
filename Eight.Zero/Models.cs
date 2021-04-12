@@ -1,7 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Eight.Zero
 {
+    public class Course
+    {
+        public string CourseName { get; set; }
+        public string Language { get; set; }
+        public Author Author { get; set; }
+        public DateTime PublishedAt { get; set; }
+        public int PublishedYear { get; set; }
+        public bool IsActive { get; set; }
+        public string[] Tags { get; set; }
+    }
+
     public class Circle
     {
         public int Radius { get; }
@@ -114,13 +126,20 @@ namespace Eight.Zero
 
     public class Author
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
-
-        public Author(string name, string email)
+#pragma warning disable 8618
+        public Author()
+#pragma warning restore 8618
         {
-            Name = name;
-            Email = email;
+            
+        }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        public Author(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
         }
     }
 }

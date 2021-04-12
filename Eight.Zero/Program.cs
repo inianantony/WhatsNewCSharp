@@ -55,6 +55,23 @@ namespace Eight.Zero
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("JsonSerializer Example");
+            Console.WriteLine("----------------------");
+            var options1 = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+
+
+            var text = File.ReadAllText("sample.json");
+            var course = JsonSerializer.Deserialize<Course>(text, options1);
+
+            Console.WriteLine($"Course name: {course.CourseName}");
+            Console.WriteLine($"Author: {course.Author.FirstName} " +
+                              $"{course.Author.LastName}");
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
             Console.WriteLine("Array Indices and Ranges Example");
             Console.WriteLine("--------------------------------");
             var numbers = Enumerable.Range(1, 10).ToArray();
@@ -151,7 +168,7 @@ namespace Eight.Zero
                     $"{comment.Body.Substring(0, 10)}..." :
                     comment.Body;
 
-                Console.WriteLine($"{comment.PostedBy.Name} ({comment.PostedBy.Email}): " + $"{commentPreview}");
+                Console.WriteLine($"{comment.PostedBy.FirstName} ({comment.PostedBy.LastName}): " + $"{commentPreview}");
             }
         }
     }
