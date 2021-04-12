@@ -9,6 +9,7 @@ namespace Eight.Zero
         {
             var numbers = Enumerable.Range(1, 10).ToArray();
             var copy = numbers[0..^0]; // Copy all the numbers
+            var copy1 = numbers[..]; // Copy all the numbers
             var allButFirst = numbers[1..];
             var lastItemRange = numbers[^1..];
             var lastItem = numbers[^1];
