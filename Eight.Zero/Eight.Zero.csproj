@@ -7,4 +7,10 @@
     <nullable>enable</nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Update="sample.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

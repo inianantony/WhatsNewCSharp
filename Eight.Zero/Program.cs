@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Text.Json;
+using System.IO;
 
 namespace Eight.Zero
 {
@@ -7,6 +9,13 @@ namespace Eight.Zero
     {
         static void Main(string[] args)
         {
+            var jsonFile = File.ReadAllBytes("sample.json");
+            var jsonSpan = jsonFile.AsSpan();
+            var jsonReader = new Utf8JsonReader(jsonSpan);
+            while (jsonReader.Read())
+            {
+                Console.WriteLine(GetTokenDesc(jsonReader));
+            }
             var numbers = Enumerable.Range(1, 10).ToArray();
             var copy = numbers[0..^0]; // Copy all the numbers
             var copy1 = numbers[..]; // Copy all the numbers
@@ -38,6 +47,23 @@ namespace Eight.Zero
 
             PrintPostInfo(null);
         }
+
+        private static string GetTokenDesc(Utf8JsonReader json) =>
+            json.TokenType switch
+            {
+                JsonTokenType.StartObject => "START OBJECT",
+                JsonTokenType.EndObject => "END OBJECT",
+                JsonTokenType.StartArray => "START ARRAY",
+                JsonTokenType.EndArray => "END ARRAY",
+                JsonTokenType.PropertyName => $"PROPERTY: {json.GetString()}",
+                JsonTokenType.Comment => $"COMMENT: {json.GetString()}",
+                JsonTokenType.String => $"STRING: {json.GetString()}",
+                JsonTokenType.Number => $"NUMBER: {json.GetInt32()}",
+                JsonTokenType.True => $"BOOL: {json.GetBoolean()}",
+                JsonTokenType.False => $"BOOL: {json.GetBoolean()}",
+                JsonTokenType.Null => $"NULL",
+                _ => $"**UNHANDLED TOKEN: {json.TokenType}"
+            };
 
         static void PrintPostInfo(BlogPost post)
         {
