@@ -21,6 +21,12 @@ namespace Eight.Zero
             public string Body { get; set; }
             public Author PostedBy { get; set; }
 
+            public Comment(string body, Author postedBy)
+            {
+                Body = body;
+                PostedBy = postedBy;
+            }
+
         }
 
         public class Author
