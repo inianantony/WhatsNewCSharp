@@ -43,6 +43,7 @@ namespace Eight.Zero
 
         static void Main(string[] args)
         {
+            BlogPost bp = new BlogPost("New Post");
             Console.WriteLine("Hello World!");
         }
     }
