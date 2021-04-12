@@ -51,19 +51,25 @@ namespace Eight.Zero
     public static class SwitchExpressionSample
     {
         public static string DisplayShapeInfo(object shape) =>
-             shape switch
-             {
-                 Rectangle r => r switch
-                 {
-                     _ when r.Length == r.Width => "Square!",
-                     _ => $"Rectangle ${r.Length}",
-                 },
-                 Circle { Radius: 1 } => "Small Circle",
-                 Circle c => $"Circle ${c.Radius}",
-                 Triangle t => $"Triangle ${t.Side1}, ${t.Side2}, ${t.Side3}",
-                 _ => "Unknown Shape"
-             };
+            shape switch
+            {
+                Rectangle r => r switch
+                {
+                    _ when r.Length == r.Width => "Square!",
+                    _ => $"Rectangle ${r.Length}",
+                },
+                Circle { Radius: 1 } => "Small Circle",
+                Circle c => $"Circle ${c.Radius}",
+                Triangle t => $"Triangle ${t.Side1}, ${t.Side2}, ${t.Side3}",
+                _ => "Unknown Shape"
+            };
+    }
 
-
+    public static class TuplePatternSample
+    {
+        public static Color GetColor(Color c1, Color c2)
+        {
+            return Color.Unknown;
+        }
     }
 }
