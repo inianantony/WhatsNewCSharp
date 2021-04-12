@@ -71,7 +71,7 @@ namespace Eight.Zero
         {
             return (c1, c2) switch
             {
-
+                (Color.Red,Color.Blue) => Color.Purple
             };
         }
     }
