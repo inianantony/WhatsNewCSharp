@@ -52,7 +52,11 @@ namespace Eight.Zero
     {
         public static string DisplayShapeInfo(object shape)
         {
-            return string.Empty;
+            string result = shape switch
+            {
+
+            };
+            return result;
         }
 
     }
