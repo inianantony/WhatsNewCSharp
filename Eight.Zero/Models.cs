@@ -19,6 +19,18 @@ namespace Eight.Zero
                 HomeRoomTeacher = homeRoomTeacher;
                 GradeLevel = gradeLevel;
             }
+
+            public void Deconstruct(out string firstName,
+                out string lastName,
+                out Teacher homeRoomTeacher,
+                out int gradeLevel)
+            {
+                firstName = FirstName;
+                lastName = LastName;
+                homeRoomTeacher = HomeRoomTeacher;
+                gradeLevel = GradeLevel;
+            }
+
         }
 
         public class Teacher
@@ -33,6 +45,16 @@ namespace Eight.Zero
                 LastName = lastName;
                 Subject = subject;
             }
+
+            public void Deconstruct(out string firstName,
+                out string lastName,
+                out string subject)
+            {
+                firstName = FirstName;
+                lastName = LastName;
+                subject = Subject;
+            }
+
         }
 
         public class BlogPost
