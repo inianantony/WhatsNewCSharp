@@ -37,6 +37,14 @@ namespace Eight.Zero
             // Works because of deconstructor
             return s is (_, _, (_, _, "Math"), 7);
         }
+    }
+
+    public static class PropertyPatternSample
+    {
+        public static bool IsUsBasedWithUkManager(object o)
+        {
+            return false;
+        }
 
     }
 }
