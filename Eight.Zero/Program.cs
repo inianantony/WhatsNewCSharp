@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Buffers;
 using System.Linq;
 using System.Text.Json;
 using System.IO;
+using System.Text;
 
 namespace Eight.Zero
 {
@@ -30,6 +32,26 @@ namespace Eight.Zero
             Console.WriteLine($"Author first name: {firstName}");
             Console.WriteLine(Environment.NewLine);
             EnumerateElement(root);
+
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("JSON Writer Example");
+            Console.WriteLine("----------------------");
+            var options = new JsonWriterOptions
+            {
+                Indented = true
+            };
+
+            var buffer = new ArrayBufferWriter<byte>();
+            using var json = new Utf8JsonWriter(buffer, options);
+
+            PopulateJson(json);
+            json.Flush();
+
+            var output = buffer.WrittenSpan.ToArray();
+            var ourJson = Encoding.UTF8.GetString(output);
+            Console.WriteLine(ourJson);
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
@@ -65,6 +87,23 @@ namespace Eight.Zero
             post.Comments.Add(null);
 
             PrintPostInfo(null);
+        }
+
+        private static void PopulateJson(Utf8JsonWriter json)
+        {
+            json.WriteStartObject();
+            json.WritePropertyName("Info");
+            json.WriteStringValue("Learning C#8");
+
+            json.WriteString("language", "C#");
+
+            json.WriteStartObject("MyName");
+
+            json.WriteString("firstName", "Inian");
+            json.WriteString("lastName", "Antony");
+
+            json.WriteEndObject();
+            json.WriteEndObject();
         }
 
         private static void EnumerateElement(JsonElement root)
