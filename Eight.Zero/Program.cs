@@ -43,7 +43,7 @@ namespace Eight.Zero
     {
         public static bool IsUsBasedWithUkManager(object o)
         {
-            return false;
+            return o is Employee e && e is { Region: "US", ReportsTo: { Region: "UK" } };
         }
 
     }
