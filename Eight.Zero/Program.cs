@@ -69,7 +69,10 @@ namespace Eight.Zero
     {
         public static Color GetColor(Color c1, Color c2)
         {
-            return Color.Unknown;
+            return (c1, c2) switch
+            {
+
+            };
         }
     }
 }
