@@ -47,4 +47,13 @@ namespace Eight.Zero
         }
 
     }
+
+    public static class SwitchExpressionSample
+    {
+        public static string DisplayShapeInfo(object shape)
+        {
+            return string.Empty;
+        }
+
+    }
 }
