@@ -54,7 +54,7 @@ namespace Eight.Zero
         {
             string result = shape switch
             {
-
+                Rectangle r => $"Rectangle ${r.Length}",
             };
             return result;
         }
