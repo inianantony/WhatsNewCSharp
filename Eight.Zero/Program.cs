@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Eight.Zero
 {
@@ -6,13 +7,35 @@ namespace Eight.Zero
     {
         static void Main(string[] args)
         {
+            var numbers = Enumerable.Range(1, 10).ToArray();
+            var copy = numbers[0..^0]; // Copy all the numbers
+            var allButFirst = numbers[1..];
+            var lastItemRange = numbers[^1..];
+            var lastItem = numbers[^1];
+            var lastThree = numbers[^3..];
+
+            Index middle = 4;
+            Index threeFromEnd = ^3;
+            Range customRange = middle..threeFromEnd;
+            var custom = numbers[customRange];
+
+            Console.WriteLine($"numbers: {string.Join(", ", numbers)}");
+            Console.WriteLine($"copy: {string.Join(", ", copy)}");
+            Console.WriteLine($"allButFirst: {string.Join(", ", allButFirst)}");
+            Console.WriteLine($"lastItemRange: {string.Join(", ", lastItemRange)}");
+            Console.WriteLine($"lastItem: {lastItem}");
+            Console.WriteLine($"lastThree: {string.Join(", ", lastThree)}");
+            Console.WriteLine($"customRange: {customRange}");
+            Console.WriteLine($"custom: {string.Join(", ", custom)}");
+            Console.Read();
+
+
             var post = new BlogPost("Nullable Ref Types Rock!");
             post.Comments.Add(new Comment("Yes they do!", new Author("John", "john@nullrefs.com")));
             post.Comments.Add(new Comment("I love them!", new Author("Leah", "leah@nullrefs.com")));
             post.Comments.Add(null);
 
             PrintPostInfo(null);
-
         }
 
         static void PrintPostInfo(BlogPost post)
