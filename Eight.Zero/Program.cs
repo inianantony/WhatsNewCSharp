@@ -7,10 +7,10 @@ namespace Eight.Zero
     {
         public class BlogPost
         {
-            public string Title { get; set; }
+            public string? Title { get; set; }
             public List<Comment> Comments { get; } = new List<Comment>();
 
-            public BlogPost(string title)
+            public BlogPost(string? title)
             {
                 Title = title;
             }
@@ -43,8 +43,28 @@ namespace Eight.Zero
 
         static void Main(string[] args)
         {
-            BlogPost bp = new BlogPost("New Post");
-            Console.WriteLine("Hello World!");
+            var post = new BlogPost("Nullable Ref Types Rock!");
+            post.Comments.Add(new Comment("Yes they do!", new Author("John", "john@nullrefs.com")));
+            post.Comments.Add(new Comment("I love them!", new Author("Leah", "leah@nullrefs.com")));
+            post.Comments.Add(null);
+
+            PrintPostInfo(null);
+
         }
+
+        static void PrintPostInfo(BlogPost post)
+        {
+            Console.WriteLine($"{post.Title} ({post.Title.Length})");
+
+            foreach (var comment in post.Comments)
+            {
+                var commentPreview = comment.Body.Length > 10 ?
+                    $"{comment.Body.Substring(0, 10)}..." :
+                    comment.Body;
+
+                Console.WriteLine($"{comment.PostedBy.Name} ({comment.PostedBy.Email}): " + $"{commentPreview}");
+            }
+        }
+
     }
 }
