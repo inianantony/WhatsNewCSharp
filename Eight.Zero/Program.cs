@@ -55,6 +55,7 @@ namespace Eight.Zero
             string result = shape switch
             {
                 Rectangle r => $"Rectangle ${r.Length}",
+                Circle { Radius: 1 } => "Small Circle",
                 Circle c => $"Circle ${c.Radius}",
                 Triangle t => $"Triangle ${t.Side1}, ${t.Side2}, ${t.Side3}",
                 _ => "Unknown Shape"
