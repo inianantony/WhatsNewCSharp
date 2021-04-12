@@ -1,58 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Eight.Zero
 {
     class Program
     {
-        public class BlogPost
-        {
-            public string? Title { get; set; }
-            public List<Comment> Comments { get; } = new List<Comment>();
-
-            public BlogPost(string? title)
-            {
-                Title = title;
-            }
-        }
-
-        public class Comment
-        {
-            public string Body { get; set; }
-            public Author PostedBy { get; set; }
-
-            public Comment(string body, Author postedBy)
-            {
-                Body = body;
-                PostedBy = postedBy;
-            }
-
-        }
-
-        public class Author
-        {
-            public string Name { get; set; }
-            public string Email { get; set; }
-
-            public Author(string name, string email)
-            {
-                Name = name;
-                Email = email;
-            }
-        }
-
         static void Main(string[] args)
         {
-            var post = new BlogPost("Nullable Ref Types Rock!");
-            post.Comments.Add(new Comment("Yes they do!", new Author("John", "john@nullrefs.com")));
-            post.Comments.Add(new Comment("I love them!", new Author("Leah", "leah@nullrefs.com")));
+            var post = new Models.BlogPost("Nullable Ref Types Rock!");
+            post.Comments.Add(new Models.Comment("Yes they do!", new Models.Author("John", "john@nullrefs.com")));
+            post.Comments.Add(new Models.Comment("I love them!", new Models.Author("Leah", "leah@nullrefs.com")));
             post.Comments.Add(null);
 
             PrintPostInfo(null);
 
         }
 
-        static void PrintPostInfo(BlogPost post)
+        static void PrintPostInfo(Models.BlogPost post)
         {
             Console.WriteLine($"{post.Title} ({post.Title!.Length})");
 
@@ -65,6 +28,7 @@ namespace Eight.Zero
                 Console.WriteLine($"{comment.PostedBy.Name} ({comment.PostedBy.Email}): " + $"{commentPreview}");
             }
         }
+
 
     }
 }
