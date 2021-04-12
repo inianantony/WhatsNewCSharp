@@ -54,7 +54,7 @@ namespace Eight.Zero
 
         static void PrintPostInfo(BlogPost post)
         {
-            Console.WriteLine($"{post.Title} ({post.Title.Length})");
+            Console.WriteLine($"{post.Title} ({post.Title!.Length})");
 
             foreach (var comment in post.Comments)
             {
