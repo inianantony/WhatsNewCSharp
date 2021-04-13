@@ -7,10 +7,49 @@ using System.Text;
 
 namespace Eight.Zero
 {
+    public interface IAnimalWidget
+    {
+        string Name { get; }
+
+        int Happiness { get; set; }
+    }
+    public class DogWidget : IAnimalWidget
+    {
+        public string Name => "Dog";
+        public int Happiness { get; set; } = 50;
+    }
+
+    public class CatWidget : IAnimalWidget
+    {
+        public string Name => "Cat";
+        public int Happiness { get; set; } = 0;
+    }
+
+    public class HamsterWidget : IAnimalWidget
+    {
+        public string Name => "Hamster";
+        public int Happiness { get; set; } = 50;
+    }
     class Program
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("Default interface Example");
+            Console.WriteLine("----------------------");
+            var dog = new DogWidget();
+            var cat = new CatWidget();
+            var hamster = new HamsterWidget();
+
+            var animals = new IAnimalWidget[] { dog, cat, hamster };
+            foreach (var animal in animals)
+            {
+                Console.WriteLine($"Happiness level for {animal.Name}: {animal.Happiness}");
+            }
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
             Console.WriteLine("Utf8JsonReader Example");
             Console.WriteLine("----------------------");
             var jsonFile = File.ReadAllBytes("sample.json");
