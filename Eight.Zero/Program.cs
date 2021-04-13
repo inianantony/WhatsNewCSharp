@@ -12,6 +12,11 @@ namespace Eight.Zero
         string Name { get; }
 
         int Happiness { get; set; }
+
+        public void Feed()
+        {
+
+        }
     }
     public class DogWidget : IAnimalWidget
     {
