@@ -9,6 +9,7 @@ namespace Eight.Zero
 {
     public interface IAnimalWidget
     {
+        private static int AmountToFeed = 10;
         string Name { get; }
 
         int Happiness { get; set; }
