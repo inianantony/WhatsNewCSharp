@@ -15,7 +15,7 @@ namespace Eight.Zero
     {
         static int ThreadId => Thread.CurrentThread.ManagedThreadId;
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
@@ -23,7 +23,7 @@ namespace Eight.Zero
             Console.WriteLine("----------------------");
             var orderFactory = new OrderFactory();
             Console.WriteLine($"[{ThreadId}]Enumerating orders...");
-            foreach (var order in orderFactory.MakeOrders(5))
+            await foreach (var order in orderFactory.MakeOrders(5))
             {
                 Console.WriteLine($"[{ThreadId}]Received order {order.Id}.");
             }
@@ -51,12 +51,18 @@ namespace Eight.Zero
             Console.WriteLine("Utf8JsonReader Example");
             Console.WriteLine("----------------------");
             var jsonFile = File.ReadAllBytes("sample.json");
-            var jsonSpan = jsonFile.AsSpan();
-            var jsonReader = new Utf8JsonReader(jsonSpan);
-            while (jsonReader.Read())
+
+            void PrintJsonData()
             {
-                Console.WriteLine(GetTokenDesc(jsonReader));
+                var jsonSpan = jsonFile.AsSpan();
+                var jsonReader = new Utf8JsonReader(jsonSpan);
+                while (jsonReader.Read())
+                {
+                    Console.WriteLine(GetTokenDesc(jsonReader));
+                }
             }
+
+            PrintJsonData();
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
@@ -216,12 +222,12 @@ namespace Eight.Zero
 
     class OrderFactory
     {
-        public IEnumerable<Order> MakeOrders(int count)
+        public async IAsyncEnumerable<Order> MakeOrders(int count)
         {
             for (var i = 0; i < count; i++)
             {
                 // Pretend to call some expensive process to build up the order.
-                Task.Delay(1000).Wait();
+                await Task.Delay(1000);
 
                 yield return new Order { Id = i + 1 };
             }
