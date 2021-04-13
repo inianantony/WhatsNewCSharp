@@ -13,9 +13,9 @@ namespace Eight.Zero
 
         int Happiness { get; set; }
 
-        public void Feed()
+        void Feed()
         {
-
+            Happiness += 10;
         }
     }
     public class DogWidget : IAnimalWidget
@@ -50,6 +50,7 @@ namespace Eight.Zero
             var animals = new IAnimalWidget[] { dog, cat, hamster };
             foreach (var animal in animals)
             {
+                animal.Feed();
                 Console.WriteLine($"Happiness level for {animal.Name}: {animal.Happiness}");
             }
 
