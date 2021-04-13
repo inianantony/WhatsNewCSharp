@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Eight.Zero
 {
+    class Order
+    {
+        public int Id { get; set; }
+    }
     public class Course
     {
         public string CourseName { get; set; }

@@ -1,56 +1,34 @@
 ﻿using System;
 using System.Buffers;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.IO;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Eight.Zero
 {
-    public interface IAnimalWidget
-    {
-        private static int AmountToFeed = 10;
-
-        static void SetAmountToFeed(int amount)
-        {
-            AmountToFeed = amount;
-        }
-        string Name { get; }
-
-        int Happiness { get; set; }
-
-        void Feed()
-        {
-            Happiness += AmountToFeed;
-        }
-    }
-    public class DogWidget : IAnimalWidget
-    {
-        public string Name => "Dog";
-        public int Happiness { get; set; } = 50;
-
-        public void Feed()
-        {
-            Happiness += 200;
-        }
-        
-    }
-
-    public class CatWidget : IAnimalWidget
-    {
-        public string Name => "Cat";
-        public int Happiness { get; set; } = 0;
-    }
-
-    public class HamsterWidget : IAnimalWidget
-    {
-        public string Name => "Hamster";
-        public int Happiness { get; set; } = 50;
-    }
+    
     class Program
     {
+        static int ThreadId => Thread.CurrentThread.ManagedThreadId;
+
         static void Main(string[] args)
         {
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("Async Streams Example");
+            Console.WriteLine("----------------------");
+            var orderFactory = new OrderFactory();
+            Console.WriteLine($"[{ThreadId}]Enumerating orders...");
+            foreach (var order in orderFactory.MakeOrders(5))
+            {
+                Console.WriteLine($"[{ThreadId}]Received order {order.Id}.");
+            }
+            Console.WriteLine($"[{ThreadId}]All orders created!");
+
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine("Default interface Example");
@@ -234,6 +212,61 @@ namespace Eight.Zero
                 Console.WriteLine($"{comment.PostedBy.FirstName} ({comment.PostedBy.LastName}): " + $"{commentPreview}");
             }
         }
+    }
+
+    class OrderFactory
+    {
+        public IEnumerable<Order> MakeOrders(int count)
+        {
+            for (var i = 0; i < count; i++)
+            {
+                // Pretend to call some expensive process to build up the order.
+                Task.Delay(1000).Wait();
+
+                yield return new Order { Id = i + 1 };
+            }
+        }
+    }
+
+    public interface IAnimalWidget
+    {
+        private static int _amountToFeed = 10;
+
+        static void SetAmountToFeed(int amount)
+        {
+            _amountToFeed = amount;
+        }
+        string Name { get; }
+
+        int Happiness { get; set; }
+
+        void Feed()
+        {
+            Happiness += _amountToFeed;
+        }
+    }
+    public class DogWidget : IAnimalWidget
+    {
+        public string Name => "Dog";
+        public int Happiness { get; set; } = 50;
+
+        public void Feed()
+        {
+            Happiness += 200;
+        }
+
+    }
+
+    public class CatWidget : IAnimalWidget
+    {
+        public string Name => "Cat";
+        public int Happiness { get; set; } = 0;
+    }
+
+    public class HamsterWidget : IAnimalWidget
+    {
+        public string Name => "Hamster";
+        public int Happiness { get; set; } = 50;
     }
 
     public static class PositionalPatternSample
