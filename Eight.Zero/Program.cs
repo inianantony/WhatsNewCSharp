@@ -19,6 +19,14 @@ namespace Eight.Zero
         {
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
+            Console.WriteLine("Null Coalescing Assignment Example");
+            Console.WriteLine("----------------------");
+            string? defaultVal = null;
+            defaultVal ??= "PlaceHolder";
+            Console.WriteLine(defaultVal);
+
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(Environment.NewLine);
             Console.WriteLine("Async Streams Example");
             Console.WriteLine("----------------------");
             var orderFactory = new OrderFactory();
