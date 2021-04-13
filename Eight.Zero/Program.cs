@@ -52,7 +52,7 @@ namespace Eight.Zero
             Console.WriteLine("----------------------");
             var jsonFile = File.ReadAllBytes("sample.json");
 
-            void PrintJsonData()
+            static void PrintJsonData(byte[] jsonFile)
             {
                 var jsonSpan = jsonFile.AsSpan();
                 var jsonReader = new Utf8JsonReader(jsonSpan);
@@ -62,7 +62,7 @@ namespace Eight.Zero
                 }
             }
 
-            PrintJsonData();
+            PrintJsonData(jsonFile);
 
             Console.WriteLine(Environment.NewLine);
             Console.WriteLine(Environment.NewLine);
